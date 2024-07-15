@@ -1,7 +1,6 @@
 .cards {
-  font-size: 24px;
   font-weight: 900;
-  line-height: 29px;
+  line-height: 1.2;
   margin-top: 40px;
 }
 
@@ -42,4 +41,17 @@
   border-color: transparent;
   width: 21px;
   height: 18px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.card__like-button:hover {
+  opacity: 0.6;
+}
+
+.card__title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
