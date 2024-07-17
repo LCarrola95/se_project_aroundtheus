@@ -68,31 +68,23 @@
   opacity: 0.6;
 }
 
-@media screen and (max-width: 1280px) {
+/*@media screen and (max-width: 800px) {
   .profile {
-    margin: 0 20px;
-  }
-  .profile__add-button {
-    margin: auto;
-  }
-}
-
-@media screen and (max-width: 775px) {
-  .profile {
-    margin: 0 20px;
+    margin: 45px 20px;
     max-width: calc(100% - 40px);
     flex-direction: column;
   }
-}
+}*/
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 690px) {
   .profile {
     flex-direction: column;
   }
 
   .profile__title {
-    margin: 0;
     font-size: 22px;
+    margin-top: 30px;
+    margin-left: 43px;
   }
 
   .profile__info {
@@ -108,9 +100,18 @@
     margin-top: 14px;
   }
   .profile__add-button {
-    margin: 36px 0;
-    width: 90%;
+    margin: 36px 0 0;
+    width: 282px;
     padding-left: 19px;
     padding-right: 19px;
+  }
+  .profile__image {
+    margin: 0;
+  }
+  .profile__edit-button {
+    height: 18px;
+    width: 18px;
+    margin-top: 34px;
+    margin-left: 10px;
   }
 }

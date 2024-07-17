@@ -8,5 +8,11 @@
 .footer__copyright {
   padding-top: 67px;
   padding-bottom: 60px;
-  margin: 0;
+  margin: auto;
+}
+
+@media screen and (max-width: 690px) {
+  .footer {
+    font-size: 14px;
+  }
 }
