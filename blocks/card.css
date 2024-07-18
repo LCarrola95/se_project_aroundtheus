@@ -27,6 +27,7 @@
   height: 18px;
   opacity: 1;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .card__like-button:hover {

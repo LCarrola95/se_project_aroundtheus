@@ -28,6 +28,8 @@
   grid-area: title;
   max-width: 415px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .profile__edit-button {
@@ -40,6 +42,7 @@
   margin: auto 18px;
   opacity: 1;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -53,6 +56,9 @@
   grid-area: description;
   margin: 0;
   max-width: 415px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .profile__add-button {
@@ -65,6 +71,7 @@
   margin-left: auto;
   opacity: 1;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {
