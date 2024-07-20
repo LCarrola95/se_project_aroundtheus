@@ -12,10 +12,13 @@
 @media screen and (max-width: 690px) {
   .header {
     padding-bottom: 32px;
+    width: 100%;
+    margin-top: 28px;
   }
 
   .header__image {
     height: 24px;
     width: 126px;
+    padding-left: 27px;
   }
 }

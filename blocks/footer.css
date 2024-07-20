@@ -15,4 +15,7 @@
   .footer {
     font-size: 14px;
   }
+  .footer__copyright {
+    padding: 48px 19px 36px;
+  }
 }
