@@ -2,6 +2,8 @@
 
 This is the third project of the Software Engineering program at Tripleten. It was created using HTML and CSS, based on the Figma design. This project allows the screen to be used on mobile devices and tablets.
 
+**View my project live [here] (https://github.com/LCarrola95/se_project_aroundtheus)**
+
 ## Project features
 
 - Semantic HTML5
@@ -13,4 +15,4 @@ This is the third project of the Software Engineering program at Tripleten. It w
 
 ### Overview
 
-- Below I have two videos explaining the project. -https://drive.google.com/drive/folders/1n207KLjYQzyOmsBuVelH_WAUnvVgRfpL?usp=drive_link
+Below I have a link to a video explaining the project. -https://drive.google.com/file/d/1IEY72JDXCQd2FNiClyv6U9K4yoz0ixVa/view?usp=drive_link

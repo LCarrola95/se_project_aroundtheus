@@ -30,7 +30,7 @@
   max-width: 373px;
   white-space: nowrap;
   overflow: hidden;
-  /*text-overflow: ellipsis;*/
+  text-overflow: ellipsis;
 }
 
 .profile__edit-button {
@@ -98,6 +98,7 @@
     line-height: 1.2;
     margin-top: 30px;
     margin-left: 35px;
+    max-width: 196px;
   }
 
   .profile__info {
@@ -111,6 +112,8 @@
     text-align: center;
     font-size: 14px;
     margin-top: 14px;
+    padding: 0;
+    max-width: 282px;
   }
   .profile__add-button {
     margin: 36px 0 0;
