@@ -104,7 +104,7 @@
   .profile__info {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    max-width: 100%;
     justify-content: center;
   }
   .profile__description {
