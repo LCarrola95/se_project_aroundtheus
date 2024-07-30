@@ -85,9 +85,20 @@
     margin: 123px 19px;
   }
 
+  .modal__heading {
+    margin: 25px 22px 75px;
+  }
+
+  .modal__form {
+    gap: 30px;
+    margin-top: 0;
+  }
+
   .modal__button {
     max-width: 238px;
     height: 46px;
+    width: 100%;
+    margin: 45px 22px 25px;
   }
 
   .modal__close-button {
@@ -101,19 +112,14 @@
 
 @media screen and (max-width: 385px) {
   .modal__container {
-    padding: 20px;
+    padding: 0;
   }
 
-  .modal__form {
-    gap: 20px;
-  }
-
-  .modal__heading {
+  /*.modal__heading {
     font-size: 20px;
     line-height: 24px;
   }
 
   .modal__button {
-    height: 40px;
-  }
+  }*/
 }
