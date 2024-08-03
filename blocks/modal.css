@@ -5,13 +5,14 @@
   bottom: 0;
   left: 0;
   z-index: 5;
-  display: flex;
+  /*display: flex;*/
   background-color: rgba(0, 0, 0, 0.5);
   color: #000;
+  display: none;
 }
 
-.modal__modal_opened {
-  display: block;
+.modal_opened {
+  display: flex;
 }
 
 .modal__container {
@@ -37,6 +38,11 @@
   top: -45px;
   right: -45px;
   cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.modal__close-button:hover {
+  opacity: 0.6;
 }
 
 .modal__heading {
@@ -85,8 +91,12 @@
     margin: 123px 19px;
   }
 
+  /* Don't forget to fix the font size in the heading!*/
+
   .modal__heading {
     margin: 25px 22px 75px;
+    font-size: 18px;
+    line-height: 1.2;
   }
 
   .modal__form {
