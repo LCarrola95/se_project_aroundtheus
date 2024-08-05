@@ -60,6 +60,9 @@
   flex-direction: column;
   margin: 54px 36px;
   gap: 30px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 .modal__form input {
@@ -75,7 +78,8 @@
   cursor: pointer;
   background-color: #000;
   color: #fff;
-  margin: 48px 36px 37px;
+  margin: 48px 0 37px;
+  padding: 14px 125px 19px;
 }
 
 @media screen and (max-width: 690px) {
@@ -108,7 +112,8 @@
     max-width: 238px;
     height: 46px;
     width: 100%;
-    margin: 45px 22px 25px;
+    margin: 0 auto;
+    padding: 14px;
   }
 
   .modal__close-button {
