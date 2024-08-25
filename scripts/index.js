@@ -1,3 +1,4 @@
+// Initial card data
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -25,11 +26,9 @@ const initialCards = [
   },
 ];
 
-console.log(initialCards);
-
+// DOM Elements
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
-const profileAddModal = document.querySelector("#profile-card-modal");
 const profileCloseButton = document.querySelector("#modal-close-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const profileTitle = document.querySelector(".profile__title");
@@ -43,9 +42,11 @@ const cardListElement = document.querySelector(".cards__list");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
+// Functions
 function closePopup() {
   profileEditModal.classList.remove("modal_opened");
 }
+
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
@@ -65,22 +66,26 @@ function handleProfileEditSubmit(e) {
   closePopup();
 }
 
+// Event Listeners
 profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-
   profileEditModal.classList.add("modal_opened");
 });
 
 addNewCardButton.addEventListener("click", () => {
+  // Logic for adding a new card can be implemented here
   addNewCardButton.classList.add("modal__opened");
 });
 
 profileCloseButton.addEventListener("click", closePopup);
-
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
+// Render initial cards
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListElement.append(cardElement);
 });
+
+// Log initial cards to console
+console.log(initialCards);
