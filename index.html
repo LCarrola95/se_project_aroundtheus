@@ -55,7 +55,7 @@
           id="modal-close-button"
         ></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form">
+        <form class="modal__form" id="profile-edit-form">
           <input
             class="modal__input"
             type="text"
@@ -97,11 +97,24 @@
             class="modal__input modal__input_type_url"
             type="url"
             id="profile-description-input"
-            name="description"
-            placeholder="Image URL"
+            name="url"
+            placeholder="Image link"
           />
-          <button type="submit" class="modal__button">Save</button>
+          <button type="submit" class="modal__button">Create</button>
         </form>
+      </div>
+    </div>
+
+    <!--Image modal-->
+    <div class="modal" id="image-modal">
+      <div class="modal__container modal__container_type_image">
+        <button
+          type="button"
+          class="modal__close-button"
+          id="modal-close-button"
+        ></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__caption"></p>
       </div>
     </div>
 
@@ -111,6 +124,7 @@
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button type="button" class="card__like-button"></button>
+          <button type="button" class="card__delete-button"></button>
         </div>
       </li>
     </template>
