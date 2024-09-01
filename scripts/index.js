@@ -133,6 +133,8 @@ cardAddForm.addEventListener("submit", (e) => {
 
   cardListElement.prepend(newCardElement);
 
+  cardAddForm.reset();
+
   closeModal(cardAddModal);
 });
 
