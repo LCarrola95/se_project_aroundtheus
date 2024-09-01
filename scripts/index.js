@@ -50,15 +50,21 @@ const addCloseButton = cardAddModal.querySelector("#modal-close-button");
 const imagePreviewModal = document.querySelector("#image-modal");
 const modalImageElement = imagePreviewModal.querySelector(".modal__image");
 const modalCaption = imagePreviewModal.querySelector(".modal__caption");
+const imageCloseButton = imagePreviewModal.querySelector("#modal-close-button");
 
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 
 // Functions
-function closeModal() {
-  profileEditModal.classList.remove("modal_opened");
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+}
+
+function closeModal(modal) {
+  /*profileEditModal.classList.remove("modal_opened");
   cardAddModal.classList.remove("modal_opened");
-  imagePreviewModal.classList.remove("modal_opened");
+  imagePreviewModal.classList.remove("modal_opened");*/
+  modal.classList.remove("modal_opened");
 }
 
 function getCardElement(cardData) {
@@ -78,9 +84,9 @@ function getCardElement(cardData) {
 
   cardImageElement.addEventListener("click", () => {
     modalImageElement.src = cardData.link;
+    modalImageElement.alt = cardData.name;
     modalCaption.textContent = cardData.name;
-    imagePreviewModal.classList.add("modal_opened");
-    imagePreviewModal.addEventListener("click", closeModal);
+    openModal(imagePreviewModal);
   });
 
   cardImageElement.src = cardData.link;
@@ -94,22 +100,25 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closeModal();
+  closeModal(profileEditModal);
 }
 
 // Event Listeners
 profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
-  profileEditModal.classList.add("modal_opened");
+  openModal(profileEditModal);
 });
 
 addNewCardButton.addEventListener("click", () => {
-  cardAddModal.classList.add("modal_opened");
+  openModal(cardAddModal);
 });
 
-profileCloseButton.addEventListener("click", closeModal);
-addCloseButton.addEventListener("click", closeModal);
+profileCloseButton.addEventListener("click", () =>
+  closeModal(profileEditModal)
+);
+addCloseButton.addEventListener("click", () => closeModal(cardAddModal));
+imageCloseButton.addEventListener("click", () => closeModal(imagePreviewModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
 cardAddForm.addEventListener("submit", (e) => {
@@ -124,7 +133,7 @@ cardAddForm.addEventListener("submit", (e) => {
 
   cardListElement.prepend(newCardElement);
 
-  closeModal();
+  closeModal(cardAddModal);
 });
 
 // Render initial cards
