@@ -103,10 +103,11 @@
   margin-bottom: 30px;
 }
 
-/*.modal__form input {
-  border: none;
-  border-bottom: solid 1px rgba(0, 0, 0, 0.2);
-}*/
+.modal__input_type_error {
+  border-bottom-color: rgba(255, 0, 0, 1);
+  /*margin-bottom: 5px;
+  padding-top: 13px;*/
+}
 
 .modal__button {
   width: 100%;
@@ -121,8 +122,18 @@
   transition: opacity 0.3s ease;
 }
 
+.modal__button_disabled {
+  opacity: 0.2;
+}
+
 .modal__button:hover {
   opacity: 0.8;
+}
+
+.modal__error_visible {
+  color: rgba(255, 0, 0, 1);
+  font-size: 12px;
+  line-height: 1.2;
 }
 
 @media screen and (max-width: 690px) {
@@ -137,8 +148,6 @@
     height: 322px;
     margin: 123px 19px;
   }
-
-  /* Don't forget to fix the font size in the heading!*/
 
   .modal__heading {
     margin-top: 25px;
