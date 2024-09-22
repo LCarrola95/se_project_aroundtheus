@@ -98,12 +98,12 @@
 .modal__input {
   border: none;
   border-bottom: solid 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 30px;
+  /* margin-bottom: 30px;*/
 }
 
 .modal__input_type_error {
   border-bottom-color: rgba(255, 0, 0, 1);
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 
 .modal__button {
@@ -125,7 +125,6 @@
   pointer-events: none;
   background: transparent;
   color: #000;
-  margin: auto;
 }
 
 .modal__button:hover {
@@ -134,15 +133,15 @@
 
 .modal__error {
   visibility: hidden;
-}
-
-.modal__error_visible {
   color: rgba(255, 0, 0, 1);
   font-size: 12px;
   line-height: 1.2;
   margin-bottom: 30px;
-  visibility: visible;
   min-height: 12px;
+}
+
+.modal__error_visible {
+  visibility: visible;
 }
 
 @media screen and (max-width: 690px) {
