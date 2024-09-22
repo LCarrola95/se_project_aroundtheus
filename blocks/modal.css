@@ -142,6 +142,7 @@
   line-height: 1.2;
   margin-bottom: 30px;
   visibility: visible;
+  min-height: 12px;
 }
 
 @media screen and (max-width: 690px) {

@@ -64,6 +64,7 @@ function openModal(modal) {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  window.removeEventListener("keydown", handleEscape);
   modal.removeEventListener("mousedown", handleOverlayClick);
 }
 
