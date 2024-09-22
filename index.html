@@ -57,7 +57,7 @@
         <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form" id="profile-edit-form">
           <input
-            class="modal__input modal__input_type_error"
+            class="modal__input"
             type="text"
             id="profile-name-input"
             name="title"
@@ -66,13 +66,11 @@
             maxlength="40"
             required
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="profile-name-input-error"
+          <span class="modal__error" id="profile-name-input-error"
             >Please fill out this field.</span
           >
           <input
-            class="modal__input modal__input_type_error"
+            class="modal__input"
             type="text"
             id="profile-description-input"
             name="description"
@@ -81,12 +79,12 @@
             maxlength="200"
             required
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="profile-description-input-error"
+          <span class="modal__error" id="profile-description-input-error"
             >Please fill out this field.</span
           >
-          <button type="submit" class="modal__button">Save</button>
+          <button type="submit" class="modal__button .modal__button_disabled">
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -103,7 +101,7 @@
         <h3 class="modal__heading">New Place</h3>
         <form class="modal__form" id="add-card-form">
           <input
-            class="modal__input modal__input_type_title modal__input_type_error"
+            class="modal__input modal__input_type_title"
             type="text"
             id="add-name-input"
             name="title"
@@ -112,22 +110,18 @@
             maxlength="30"
             required
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="add-name-input-error"
-          ></span>
+          <span class="modal__error" id="add-name-input-error"></span>
           <input
-            class="modal__input modal__input_type_url modal__input_type_error"
+            class="modal__input modal__input_type_url"
             type="url"
             id="add-link-input"
             name="url"
             placeholder="Image link"
             required
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="add-link-input-error"
-          ></span>
+          <span class="modal__error" id="add-link-input-error"
+            >Please enter a web address.</span
+          >
           <button
             type="submit"
             class="modal__button modal__button_disabled"
