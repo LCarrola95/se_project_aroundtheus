@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 // Initial card data
 const initialCards = [
   {
@@ -25,6 +27,14 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
+
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+
+const card = new Card(cardData, "#card-template");
+card.getView();
 
 // DOM Elements
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -81,7 +91,7 @@ function handleOverlayClick(e) {
   }
 }
 
-function getCardElement(cardData) {
+/*function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageElement = cardElement.querySelector(".card__image");
   const cardTitleElement = cardElement.querySelector(".card__title");
@@ -108,7 +118,40 @@ function getCardElement(cardData) {
   cardTitleElement.textContent = cardData.name;
 
   return cardElement;
+}*/
+
+// Function to handle the image click and open the modal
+function handleImageClick(card) {
+  modalImageElement.src = card._link;
+  modalImageElement.alt = card._name;
+  modalCaption.textContent = card._name;
+  openModal(imagePreviewModal);
 }
+
+// Render initial cards
+initialCards.forEach((cardData) => {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  const cardElement = card.getView();
+  cardListElement.append(cardElement);
+});
+
+// Adding a new card via form submission
+cardAddForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const title = e.target.title.value;
+  const url = e.target.url.value;
+
+  const card = new Card(
+    { name: title, link: url },
+    "#card-template",
+    handleImageClick
+  );
+  const newCardElement = card.getView();
+
+  cardListElement.prepend(newCardElement);
+  cardAddForm.reset();
+  closeModal(cardAddModal);
+});
 
 function handleProfileEditSubmit(e) {
   e.preventDefault();
