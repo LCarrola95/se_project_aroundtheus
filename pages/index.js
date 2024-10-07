@@ -63,8 +63,8 @@ const modalImageElement = imagePreviewModal.querySelector(".modal__image");
 const modalCaption = imagePreviewModal.querySelector(".modal__caption");
 const imageCloseButton = imagePreviewModal.querySelector("#modal-close-button");
 
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+//const cardTemplate =
+//document.querySelector("#card-template").content.firstElementChild;
 
 //validation config
 const validationConfig = {
