@@ -1,4 +1,5 @@
 import Card from "../components/Card.js";
+import FormValidator from "../components/FormValidator.js";
 
 // Initial card data
 const initialCards = [
@@ -29,8 +30,8 @@ const initialCards = [
 ];
 
 const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  name: "",
+  link: "",
 };
 
 const card = new Card(cardData, "#card-template");
@@ -64,6 +65,24 @@ const imageCloseButton = imagePreviewModal.querySelector("#modal-close-button");
 
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
+
+//validation config
+const validationConfig = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
+const profileFormValidator = new FormValidator(
+  validationConfig,
+  profileEditForm
+);
+const cardFormValidator = new FormValidator(validationConfig, cardAddForm);
+
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
 
 // Functions
 function openModal(modal) {
@@ -150,6 +169,7 @@ cardAddForm.addEventListener("submit", (e) => {
 
   cardListElement.prepend(newCardElement);
   cardAddForm.reset();
+  cardFormValidator.resetValidation();
   closeModal(cardAddModal);
 });
 
@@ -164,6 +184,7 @@ function handleProfileEditSubmit(e) {
 profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
+  profileFormValidator.resetValidation();
   openModal(profileEditModal);
 });
 
@@ -178,7 +199,7 @@ addCloseButton.addEventListener("click", () => closeModal(cardAddModal));
 imageCloseButton.addEventListener("click", () => closeModal(imagePreviewModal));
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
-cardAddForm.addEventListener("submit", (e) => {
+/*cardAddForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const title = e.target.title.value;
   const url = e.target.url.value;
@@ -199,4 +220,4 @@ cardAddForm.addEventListener("submit", (e) => {
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListElement.append(cardElement);
-});
+});*/
