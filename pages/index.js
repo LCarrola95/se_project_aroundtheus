@@ -80,6 +80,7 @@ const profileFormValidator = new FormValidator(
   profileEditForm
 );
 const cardFormValidator = new FormValidator(validationConfig, cardAddForm);
+cardFormValidator.disableButton();
 
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
@@ -141,16 +142,20 @@ function handleOverlayClick(e) {
 
 // Function to handle the image click and open the modal
 function handleImageClick(card) {
-  modalImageElement.src = card._link;
-  modalImageElement.alt = card._name;
-  modalCaption.textContent = card._name;
+  modalImageElement.src = card.link;
+  modalImageElement.alt = card.name;
+  modalCaption.textContent = card.name;
   openModal(imagePreviewModal);
+}
+
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  return card.getView();
 }
 
 // Render initial cards
 initialCards.forEach((cardData) => {
-  const card = new Card(cardData, "#card-template", handleImageClick);
-  const cardElement = card.getView();
+  const cardElement = createCard(cardData);
   cardListElement.append(cardElement);
 });
 
@@ -160,16 +165,13 @@ cardAddForm.addEventListener("submit", (e) => {
   const title = e.target.title.value;
   const url = e.target.url.value;
 
-  const card = new Card(
-    { name: title, link: url },
-    "#card-template",
-    handleImageClick
-  );
-  const newCardElement = card.getView();
+  const cardData = { name: title, link: url };
+
+  const newCardElement = createCard(cardData);
 
   cardListElement.prepend(newCardElement);
   cardAddForm.reset();
-  cardFormValidator.resetValidation();
+  cardFormValidator.disableButton();
   closeModal(cardAddModal);
 });
 
