@@ -180,6 +180,7 @@
     height: 46px;
     width: 100%;
     padding: 14px;
+    font-size: 14px;
   }
 
   .modal__close-button {
