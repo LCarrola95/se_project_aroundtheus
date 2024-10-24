@@ -57,8 +57,8 @@ const validationConfig = {
   inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: ".modal__input_type_error",
-  errorClass: ".modal__error_visible",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
 };
 
 // DOM elements
@@ -87,8 +87,8 @@ const userInfo = new UserInfo({
 // Create PopupWithForm for profile edit
 const profilePopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   userInfo.setUserInfo({
-    name: formData["profile-name"],
-    job: formData["profile-description"],
+    name: formData.title,
+    job: formData.description,
   });
   profilePopup.close();
 });
