@@ -7,30 +7,19 @@ import UserInfo from "../components/UserInfo.js";
 import { initialCards, validationConfig } from "../utils/constants.js";
 import "../pages/index.css";
 
-// DOM elements
-const profileEditButton = document.querySelector("#profile-edit-button");
-const addNewCardButton = document.querySelector(".profile__add-button");
-
 // Instantiate PopupWithImage
 const imagePopup = new PopupWithImage("#image-modal");
 imagePopup.setEventListeners();
 
-// Section to render initial cards
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (cardData) => {
-      const card = new Card(cardData, "#card-template", handleImageClick);
-      const cardElement = card.getView();
-      cardSection.addItem(cardElement);
-    },
-  },
-  ".cards__list"
+// DOM elements
+const profileEditButton = document.querySelector("#profile-edit-button");
+const addNewCardButton = document.querySelector(".profile__add-button");
+const profileNameInput = document.querySelector("#profile-name-input");
+const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
 );
 
-cardSection.renderItems();
-
-// Initialize form validators
+// Instantiate form validators
 const profileFormValidator = new FormValidator(
   validationConfig,
   document.querySelector("#profile-edit-form")
@@ -49,6 +38,26 @@ const userInfo = new UserInfo({
   jobSelector: ".profile__description",
 });
 
+// Helper function to create a new card
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  return card.getView();
+}
+
+// Section to render initial cards
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (cardData) => {
+      const cardElement = createCard(cardData);
+      cardSection.addItem(cardElement);
+    },
+  },
+  ".cards__list"
+);
+
+cardSection.renderItems();
+
 // Create PopupWithForm for profile edit
 const profilePopup = new PopupWithForm("#profile-edit-modal", (formData) => {
   userInfo.setUserInfo({
@@ -62,11 +71,7 @@ profilePopup.setEventListeners();
 // Create PopupWithForm for card addition
 const addCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
   const cardData = { name: formData["title"], link: formData["url"] };
-  const newCardElement = new Card(
-    cardData,
-    "#card-template",
-    handleImageClick
-  ).getView();
+  const newCardElement = createCard(cardData);
   cardSection.addItem(newCardElement);
   addCardPopup.close();
   cardFormValidator.disableButton();
@@ -81,14 +86,14 @@ function handleImageClick(cardData) {
 // Event Listeners
 profileEditButton.addEventListener("click", () => {
   const currentUserInfo = userInfo.getUserInfo();
-  document.querySelector("#profile-name-input").value = currentUserInfo.name;
-  document.querySelector("#profile-description-input").value =
-    currentUserInfo.job;
+
+  profileNameInput.value = currentUserInfo.name;
+  profileDescriptionInput.value = currentUserInfo.job;
+
   profilePopup.open();
   profileFormValidator.resetValidation();
 });
 
 addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
-  cardFormValidator.resetValidation();
 });
