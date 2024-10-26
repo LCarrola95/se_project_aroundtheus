@@ -73,6 +73,7 @@ const addCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
   const newCardElement = createCard(cardData);
   cardSection.addItem(newCardElement);
   addCardPopup.close();
+  addCardPopup._formElement.reset();
   cardFormValidator.disableButton();
 });
 addCardPopup.setEventListeners();
