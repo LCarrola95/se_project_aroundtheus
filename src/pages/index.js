@@ -38,7 +38,6 @@ const userInfo = new UserInfo({
   jobSelector: ".profile__description",
 });
 
-// Helper function to create a new card
 function createCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getView();
