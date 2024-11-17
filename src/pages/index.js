@@ -4,8 +4,18 @@ import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, validationConfig } from "../utils/constants.js";
+import Api from "../components/Api.js"; // Import Api class
+import { validationConfig } from "../utils/constants.js";
 import "../pages/index.css";
+
+// API Initialization
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "81e44564-32cf-4c2a-b8fb-18b8f71d8ac2",
+    "Content-Type": "application/json",
+  },
+});
 
 // Instantiate PopupWithImage
 const imagePopup = new PopupWithImage("#image-modal");
@@ -43,10 +53,10 @@ function createCard(cardData) {
   return card.getView();
 }
 
-// Section to render initial cards
+// Section to render cards
 const cardSection = new Section(
   {
-    items: initialCards,
+    items: [], // Items will be dynamically loaded
     renderer: (cardData) => {
       const cardElement = createCard(cardData);
       cardSection.addItem(cardElement);
@@ -55,26 +65,34 @@ const cardSection = new Section(
   ".cards__list"
 );
 
-cardSection.renderItems();
-
 // Create PopupWithForm for profile edit
 const profilePopup = new PopupWithForm("#profile-edit-modal", (formData) => {
-  userInfo.setUserInfo({
-    name: formData.title,
-    job: formData.description,
-  });
-  profilePopup.close();
+  api
+    .updateUserProfile({ name: formData.title, about: formData.description })
+    .then((updatedUser) => {
+      userInfo.setUserInfo({
+        name: updatedUser.name,
+        job: updatedUser.about,
+      });
+      profilePopup.close();
+    })
+    .catch((err) => console.error(err));
 });
 profilePopup.setEventListeners();
 
 // Create PopupWithForm for card addition
 const addCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
   const cardData = { name: formData["title"], link: formData["url"] };
-  const newCardElement = createCard(cardData);
-  cardSection.addItem(newCardElement);
-  addCardPopup.close();
-  addCardPopup.resetForm();
-  cardFormValidator.disableButton();
+  api
+    .addCard(cardData)
+    .then((newCard) => {
+      const newCardElement = createCard(newCard);
+      cardSection.addItem(newCardElement);
+      addCardPopup.close();
+      addCardPopup.resetForm();
+      cardFormValidator.disableButton();
+    })
+    .catch((err) => console.error(err));
 });
 addCardPopup.setEventListeners();
 
@@ -97,3 +115,15 @@ profileEditButton.addEventListener("click", () => {
 addNewCardButton.addEventListener("click", () => {
   addCardPopup.open();
 });
+
+// Initial Data Fetch
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    userInfo.setUserInfo({
+      name: userData.name,
+      job: userData.about,
+    });
+
+    cardSection.renderItems(initialCards);
+  })
+  .catch((err) => console.error(err));

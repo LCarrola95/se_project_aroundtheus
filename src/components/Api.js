@@ -1,4 +1,4 @@
-class Api {
+export default class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl;
     this._headers = options.headers;
@@ -9,10 +9,17 @@ class Api {
       headers: this._headers,
       ...options,
     })
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Error: ${res.status}`);
+      })
       .catch((err) => console.error(err));
+  }
+
+  getAppInfo() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
 
   getUserInfo() {
@@ -22,7 +29,10 @@ class Api {
   updateUserInfo(data) {
     return this._fetch("/users/me", {
       method: "PATCH",
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about,
+      }),
     });
   }
 
@@ -40,7 +50,10 @@ class Api {
   addCard(data) {
     return this._fetch("/cards", {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
     });
   }
 
