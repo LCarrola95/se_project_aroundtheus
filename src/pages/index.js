@@ -181,7 +181,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       job: userData.about,
     });
 
-    profileImage.src = userData.avatar; // Set initial profile image
+    profileImage.src = userData.avatar;
     cardSection.renderItems(initialCards);
   })
   .catch((err) => console.error(err));

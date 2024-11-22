@@ -74,7 +74,6 @@ export default class Api {
   }
 }
 
-// Example instantiation (if needed elsewhere)
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
