@@ -8,14 +8,12 @@ export default class Api {
     return fetch(`${this._baseUrl}${path}`, {
       headers: this._headers,
       ...options,
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .catch((err) => console.error(err));
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
   }
 
   getAppInfo() {
@@ -26,7 +24,7 @@ export default class Api {
     return this._fetch("/users/me");
   }
 
-  updateUserInfo(data) {
+  updateUserProfile(data) {
     return this._fetch("/users/me", {
       method: "PATCH",
       body: JSON.stringify({
@@ -36,10 +34,10 @@ export default class Api {
     });
   }
 
-  updateUserAvatar(data) {
+  updateUserAvatar(avatar) {
     return this._fetch("/users/me/avatar", {
       method: "PATCH",
-      body: JSON.stringify(data),
+      body: JSON.stringify({ avatar }),
     });
   }
 
@@ -76,6 +74,7 @@ export default class Api {
   }
 }
 
+// Example instantiation (if needed elsewhere)
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
