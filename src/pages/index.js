@@ -50,6 +50,10 @@ function handleLikeButtonClick(card, cardId) {
     .catch((err) => console.error(err));
 }
 
+function handleImageClick(cardData) {
+  imagePopup.open({ name: cardData.name, link: cardData.link });
+}
+
 function createCard(cardData) {
   const card = new Card(
     cardData,
