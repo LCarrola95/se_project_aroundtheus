@@ -41,10 +41,6 @@ export default class Card {
   }
 
   _updateLikesView() {
-    const likeCountElement =
-      this._cardElement.querySelector(".card__like-count");
-    likeCountElement.textContent = this._likes.length;
-
     if (this.isLiked()) {
       this._likeButton.classList.add("card__like-button_active");
     } else {

@@ -186,6 +186,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     });
 
     profileImage.src = userData.avatar;
-    cardSection.renderItems(initialCards);
+    cardSection.renderItems(
+      initialCards.map((card) => ({
+        ...card,
+        userId: userData._id,
+      }))
+    );
   })
   .catch((err) => console.error(err));
