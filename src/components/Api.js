@@ -34,10 +34,12 @@ export default class Api {
     });
   }
 
-  updateUserAvatar(avatar) {
+  updateUserAvatar(data) {
     return this._fetch("/users/me/avatar", {
       method: "PATCH",
-      body: JSON.stringify({ avatar }),
+      body: JSON.stringify({
+        avatar: data.avatar,
+      }),
     });
   }
 

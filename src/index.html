@@ -19,11 +19,13 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="avatar"
-            class="profile__image"
-          />
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="avatar"
+              class="profile__image"
+            />
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -147,7 +149,7 @@
 
     <!-- Delete confirmation modal -->
     <div id="delete-card-modal" class="modal">
-      <div class="modal__container">
+      <div class="modal__container modal__container_type_delete">
         <button type="button" class="modal__close-button"></button>
         <h3 class="modal__heading">Are you sure?</h3>
         <form class="modal__form" id="delete-card-form" novalidate>
