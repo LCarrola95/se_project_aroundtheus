@@ -57,9 +57,15 @@ function handleLikeButtonClick(card, cardId) {
 
   likeAction
     .then((updatedCard) => {
-      card.setLikes([{ _id: updatedCard.isLiked ? card._userId : null }]);
+      card.setLikes(updatedCard.isLiked);
     })
-    .catch((err) => console.error(err));
+    .catch((err) => {
+      console.error("Like operation failed:", err);
+
+      if (card._likeButton) {
+        card._likeButton.disabled = false;
+      }
+    });
 }
 
 function handleImageClick(cardData) {
@@ -68,7 +74,12 @@ function handleImageClick(cardData) {
 
 function createCard(cardData) {
   const card = new Card(
-    cardData,
+    {
+      ...cardData,
+      userId: userInfo.getUserInfo()._id,
+      owner: cardData.owner || { _id: cardData.ownerId },
+      isLiked: cardData.isLiked,
+    },
     "#card-template",
     handleImageClick,
     handleDeleteButtonClick,
@@ -150,10 +161,12 @@ const addCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
   api
     .addCard(cardData)
     .then((newCard) => {
-      const newCardElement = createCard(newCard);
+      const newCardElement = createCard({
+        ...newCard,
+        userId: userInfo.getUserInfo()._id,
+      });
       cardSection.addItem(newCardElement);
       addCardPopup.close();
-      addCardPopup.resetForm();
       cardFormValidator.disableButton();
     })
     .catch((err) => console.error(err))
@@ -207,13 +220,15 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userInfo.setUserInfo({
       name: userData.name,
       job: userData.about,
+      _id: userData._id,
     });
 
-    profileImageContainer.src = userData.avatar;
+    profileImage.src = userData.avatar;
     cardSection.renderItems(
       initialCards.map((card) => ({
         ...card,
         userId: userData._id,
+        isLiked: card.isLiked,
       }))
     );
   })

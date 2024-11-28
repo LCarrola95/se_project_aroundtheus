@@ -12,6 +12,10 @@ export default class PopupWithForm extends Popup {
     this._submitButtonText = this._submitButton.textContent;
   }
 
+  resetForm() {
+    this._formElement.reset(); // Changed from this._form to this._formElement
+  }
+
   _getInputValues() {
     const formValues = {};
     this._inputList.forEach((input) => {
