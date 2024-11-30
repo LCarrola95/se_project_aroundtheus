@@ -23,12 +23,16 @@
 .modal__container {
   background-color: #fff;
   border-radius: 10px;
-  padding: 0 36px 0;
+  padding: 0 36px;
   position: relative;
-  /* width: 90%;*/
   max-width: 430px;
-  min-height: 323px;
+  min-height: 330px;
   margin: auto;
+}
+
+.modal__container_type_delete {
+  min-height: 181px;
+  padding: 0 36px 36px;
 }
 
 .modal__container_type_image {
@@ -84,7 +88,6 @@
 
 .modal__form {
   width: 358px;
-  height: 27px;
   display: flex;
   flex-direction: column;
   font-weight: 400;
@@ -115,10 +118,10 @@
   cursor: pointer;
   background-color: #000;
   color: #fff;
-  /*margin: 18px 0 37px;*/
   padding: 14px 125px 19px;
   transition: opacity 0.3s ease;
   margin-top: 10px;
+  margin-bottom: 36px;
   font-size: 18px;
   line-height: 1.2;
 }
