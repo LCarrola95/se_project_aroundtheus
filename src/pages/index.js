@@ -46,6 +46,20 @@ const deleteConfirmPopup = new PopupWithConfirm(
 );
 deleteConfirmPopup.setEventListeners();
 
+//Functions
+function handleSubmit(request, popupInstance, loadingText = "Saving...") {
+  popupInstance.renderLoading(true, loadingText);
+  request()
+    .then(() => {
+      popupInstance.resetForm();
+      popupInstance.close();
+    })
+    .catch(console.error)
+    .finally(() => {
+      popupInstance.renderLoading(false);
+    });
+}
+
 function handleDeleteButtonClick(cardId) {
   deleteConfirmPopup.open(cardId);
 }
@@ -63,7 +77,6 @@ function handleLikeButtonClick(card, cardId) {
       console.error("Like operation failed:", err);
 
       if (card._likeButton) {
-        card._likeButton.disabled = false;
       }
     });
 }
@@ -137,60 +150,59 @@ const cardSection = new Section(
   ".cards__list"
 );
 
+// Edit Profile
 const profilePopup = new PopupWithForm("#profile-edit-modal", (formData) => {
-  profilePopup.renderLoading(true);
-  api
-    .updateUserProfile({ name: formData.title, about: formData.description })
-    .then((updatedUser) => {
-      userInfo.setUserInfo({
-        name: updatedUser.name,
-        job: updatedUser.about,
+  function makeRequest() {
+    return api
+      .updateUserProfile({
+        name: formData.title,
+        about: formData.description,
+      })
+      .then((updatedUser) => {
+        userInfo.setUserInfo({
+          name: updatedUser.name,
+          job: updatedUser.about,
+        });
       });
-      profilePopup.close();
-    })
-    .catch((err) => console.error(err))
-    .finally(() => {
-      profilePopup.renderLoading(false);
-    });
+  }
+  handleSubmit(makeRequest, profilePopup);
 });
 profilePopup.setEventListeners();
 
+// Add New Card
 const addCardPopup = new PopupWithForm("#profile-card-modal", (formData) => {
-  addCardPopup.renderLoading(true);
-  const cardData = { name: formData["title"], link: formData["url"] };
-  api
-    .addCard(cardData)
-    .then((newCard) => {
-      const newCardElement = createCard({
-        ...newCard,
-        userId: userInfo.getUserInfo()._id,
+  function makeRequest() {
+    return api
+      .addCard({
+        name: formData["title"],
+        link: formData["url"],
+      })
+      .then((newCard) => {
+        const newCardElement = createCard({
+          ...newCard,
+          userId: userInfo.getUserInfo()._id,
+        });
+        cardSection.addItem(newCardElement);
+        cardFormValidator.disableButton();
       });
-      cardSection.addItem(newCardElement);
-      addCardPopup.close();
-      cardFormValidator.disableButton();
-    })
-    .catch((err) => console.error(err))
-    .finally(() => {
-      addCardPopup.renderLoading(false);
-    });
+  }
+  handleSubmit(makeRequest, addCardPopup);
 });
 addCardPopup.setEventListeners();
 
-// Avatar Update Popup
+// Avatar Update
 const avatarPopup = new PopupWithForm("#avatar-edit-modal", (formData) => {
-  avatarPopup.renderLoading(true);
-  api
-    .updateUserAvatar({ avatar: formData["avatar-link"] })
-    .then((data) => {
-      profileImage.src = data.avatar;
-      avatarPopup.close();
-    })
-    .catch((err) => {
-      console.error("Error updating avatar:", err);
-    })
-    .finally(() => {
-      avatarPopup.renderLoading(false);
-    });
+  function makeRequest() {
+    return api
+      .updateUserAvatar({
+        avatar: formData["avatar-link"],
+      })
+      .then((data) => {
+        userInfo.setUserInfo({ avatar: data.avatar });
+        avatarFormValidator.disableButton();
+      });
+  }
+  handleSubmit(makeRequest, avatarPopup);
 });
 avatarPopup.setEventListeners();
 
@@ -211,7 +223,6 @@ addNewCardButton.addEventListener("click", () => {
 
 profileImageContainer.addEventListener("click", () => {
   avatarPopup.open();
-  avatarFormValidator.resetValidation();
 });
 
 // Initial Data Fetch
@@ -221,9 +232,9 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       name: userData.name,
       job: userData.about,
       _id: userData._id,
+      avatar: userData.avatar,
     });
 
-    profileImage.src = userData.avatar;
     cardSection.renderItems(
       initialCards.map((card) => ({
         ...card,

@@ -13,7 +13,7 @@ export default class PopupWithForm extends Popup {
   }
 
   resetForm() {
-    this._formElement.reset(); // Changed from this._form to this._formElement
+    this._formElement.reset();
   }
 
   _getInputValues() {
@@ -42,6 +42,5 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._formElement.reset();
   }
 }
