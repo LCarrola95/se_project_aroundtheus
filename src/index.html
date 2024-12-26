@@ -19,11 +19,13 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="avatar"
-            class="profile__image"
-          />
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="avatar"
+              class="profile__image"
+            />
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
             <button
@@ -145,12 +147,52 @@
       </div>
     </div>
 
+    <!-- Delete confirmation modal -->
+    <div id="delete-card-modal" class="modal">
+      <div class="modal__container modal__container_type_delete">
+        <button type="button" class="modal__close-button"></button>
+        <h3 class="modal__heading">Are you sure?</h3>
+        <form class="modal__form" id="delete-card-form" novalidate>
+          <button type="submit" class="modal__button">Yes</button>
+        </form>
+      </div>
+    </div>
+
+    <!--Avatar update modal-->
+    <div class="modal" id="avatar-edit-modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-button"></button>
+        <h3 class="modal__heading">Change Profile Picture</h3>
+        <form class="modal__form" id="avatar-edit-form">
+          <input
+            class="modal__input modal__input_type_url"
+            type="url"
+            id="avatar-link-input"
+            name="avatar-link"
+            placeholder="Image link"
+            required
+          />
+          <span class="modal__error" id="avatar-link-input-error"
+            >Please enter a valid URL.</span
+          >
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button type="button" class="card__like-button"></button>
+
           <button type="button" class="card__delete-button"></button>
         </div>
       </li>
